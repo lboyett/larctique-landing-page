@@ -20,12 +20,12 @@ import waves from "../assets/waves.png";
     </div>
     <div class="top-label">TORIO <br /> PANAMA 2024</div>
     <div class="navbar">
-      <h1 data-hover="woman">STAY</h1>
+      <h1 data-hover="woman" data-click="stay">STAY</h1>
       <h1 data-hover="sunset">EXPLORE</h1>
       <h1 data-hover="city">BOOK</h1>
     </div>
   </section>
-  <section class="stay">
+  <section class="stay" id="stay">
     <header>7.5500° N, 80.9500° W</header>
     <div class="stay-content-container">
       <h2>Find your home. <img src={waves.src} alt="palm" class="waves" /></h2>
@@ -53,30 +53,45 @@ import waves from "../assets/waves.png";
 
 <script>
   function addEventListeners() {
-    const firstNavbarHeader = document.querySelector(".navbar h1:first-child");
-    const secondNavbarHeader = document.querySelector(
-      ".navbar h1:nth-child(2)",
-    );
-    const thirdNavbarHeader = document.querySelector(".navbar h1:last-child");
-    const headers = [firstNavbarHeader, secondNavbarHeader, thirdNavbarHeader];
+    function addHeaderEventListeners() {
+      const firstNavbarHeader = document.querySelector(
+        ".navbar h1:first-child",
+      );
+      const secondNavbarHeader = document.querySelector(
+        ".navbar h1:nth-child(2)",
+      );
+      const thirdNavbarHeader = document.querySelector(".navbar h1:last-child");
+      const headers = [
+        firstNavbarHeader,
+        secondNavbarHeader,
+        thirdNavbarHeader,
+      ];
 
-    headers.forEach((header) => {
-      if (header) {
-        header.addEventListener("mouseover", () => {
-          const id = header.getAttribute("data-hover");
-          if (!id) return;
-          const img = document.getElementById(id);
-          img?.classList.add("active");
-        });
+      headers.forEach((header) => {
+        if (header) {
+          header.addEventListener("mouseover", () => {
+            const id = header.getAttribute("data-hover");
+            if (!id) return;
+            const img = document.getElementById(id);
+            img?.classList.add("active");
+          });
+          header.addEventListener("mouseout", () => {
+            const id = header.getAttribute("data-hover");
+            if (!id) return;
+            const img = document.getElementById(id);
+            img?.classList.remove("active");
+          });
+          header.addEventListener("click", () => {
+            const id = header.getAttribute("data-click");
+            if (!id) return;
+            const section = document.getElementById(id);
+            section?.scrollIntoView({ behavior: "smooth" });
+          });
+        }
+      });
+    }
 
-        header.addEventListener("mouseout", () => {
-          const id = header.getAttribute("data-hover");
-          if (!id) return;
-          const img = document.getElementById(id);
-          img?.classList.remove("active");
-        });
-      }
-    });
+    addHeaderEventListeners();
   }
 
   addEventListeners();
