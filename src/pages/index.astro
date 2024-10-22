@@ -82,7 +82,8 @@ import waves from "../assets/waves.png";
             img?.classList.remove("active");
           });
           header.addEventListener("click", () => {
-            const id = header.getAttribute("data-click");
+            // const id = header.getAttribute("data-click");
+            const id = "stay";
             if (!id) return;
             const section = document.getElementById(id);
             section?.scrollIntoView({ behavior: "smooth" });
